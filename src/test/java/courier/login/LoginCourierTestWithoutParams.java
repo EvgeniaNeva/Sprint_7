@@ -1,6 +1,6 @@
 package courier.login;
 
-import ru.practicum.yandex.constants.Constants;
+import io.qameta.allure.Step;
 import ru.practicum.yandex.ObjectGenerator;
 import ru.practicum.yandex.network.CourierManager;
 import ru.practicum.yandex.courier.Courier;
@@ -20,7 +20,6 @@ public class LoginCourierTestWithoutParams {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
         sendCreateRequest();
@@ -28,12 +27,14 @@ public class LoginCourierTestWithoutParams {
 
     @Test
     @DisplayName("Авторизация курьера без логина")
+    @Step("Авторизация курьера без логина")
     public void loginCourierWithoutLogin() {
         sendLoginRequest("", courier.password());
     }
 
     @Test
     @DisplayName("Авторизация курьера без пароля")
+    @Step("Авторизация курьера без пароля")
     public void loginCourierWithoutPassword() {
         sendLoginRequest(courier.login(), "");
     }

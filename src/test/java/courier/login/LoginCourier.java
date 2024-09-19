@@ -1,6 +1,6 @@
 package courier.login;
 
-import ru.practicum.yandex.constants.Constants;
+import io.qameta.allure.Step;
 import ru.practicum.yandex.ObjectGenerator;
 import ru.practicum.yandex.network.CourierManager;
 import ru.practicum.yandex.courier.Courier;
@@ -22,13 +22,13 @@ public class LoginCourier {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
     }
 
     @Test
     @DisplayName("Логин курьера")
+    @Step("Логин курьера")
     public void loginCourier() {
         courierManager.createCourier(courier.login(), courier.password(), courier.firstName());
         courierManager.login(courier.login(), courier.password()).body("id", notNullValue());

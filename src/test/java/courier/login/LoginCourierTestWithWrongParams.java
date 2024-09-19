@@ -1,6 +1,6 @@
 package courier.login;
 
-import ru.practicum.yandex.constants.Constants;
+import io.qameta.allure.Step;
 import ru.practicum.yandex.ObjectGenerator;
 import ru.practicum.yandex.network.CourierManager;
 import ru.practicum.yandex.courier.Courier;
@@ -20,19 +20,20 @@ public class LoginCourierTestWithWrongParams {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
     }
 
     @Test
     @DisplayName("Авторизация несуществующего курьера")
+    @Step("Авторизация несуществующего курьера")
     public void loginCourierWithNotExistParams() {
         sendLoginRequest(courier.login(), courier.password());
     }
 
     @Test
     @DisplayName("Авторизация курьера с неверным паролем")
+    @Step("Авторизация курьера с неверным паролем")
     public void loginCourierWithWrongPassword() {
         sendCreateRequest();
         sendLoginRequest(courier.login(), "password123456789");
@@ -40,6 +41,7 @@ public class LoginCourierTestWithWrongParams {
 
     @Test
     @DisplayName("Авторизация курьера с неверным логином")
+    @Step("Авторизация курьера с неверным логином")
     public void loginCourierWithWrongParams() {
         sendCreateRequest();
         sendLoginRequest("login123456789", "password123456789");

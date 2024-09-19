@@ -3,5 +3,5 @@ import lombok.Data;
 
 @Data
 public class OrderResponse {
-    Order[] arrayOrders;
+    private Order[] arrayOrders;
 }

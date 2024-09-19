@@ -1,7 +1,7 @@
 package order.create;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
-import ru.practicum.yandex.constants.Constants;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -32,7 +32,6 @@ public class CreateOrder {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
@@ -62,6 +61,7 @@ public class CreateOrder {
 
     @Test
     @DisplayName("Создание заказа")
+    @Step("Создание заказа")
     public void createOrder() {
         track = orderManager.create(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color).extract().body().path("track");
         MatcherAssert.assertThat(track, notNullValue());

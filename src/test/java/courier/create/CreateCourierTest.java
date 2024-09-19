@@ -1,6 +1,6 @@
 package courier.create;
 
-import ru.practicum.yandex.constants.Constants;
+import io.qameta.allure.Step;
 import ru.practicum.yandex.ObjectGenerator;
 import ru.practicum.yandex.network.CourierManager;
 import ru.practicum.yandex.courier.Courier;
@@ -21,12 +21,12 @@ public class CreateCourierTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
     @Test
     @DisplayName("Создание курьера")
+    @Step("Создание курьера")
     public void createCourierWithAllParas() {
         courier = ObjectGenerator.generateCourier();
         sendRequest();
@@ -34,6 +34,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Создание курьера с обязательными параметрами")
+    @Step("Создание курьера с обязательными параметрами")
     public void createCourierWithRequiredParams() {
         courier = ObjectGenerator.generateCourierWithoutFirstName();
         sendRequest();

@@ -1,6 +1,6 @@
 package courier.create;
 
-import ru.practicum.yandex.constants.Constants;
+import io.qameta.allure.Step;
 import ru.practicum.yandex.ObjectGenerator;
 import ru.practicum.yandex.network.CourierManager;
 import ru.practicum.yandex.courier.Courier;
@@ -20,7 +20,6 @@ public class CreateExistCourierTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Constants.DOMEN_URL;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
         courierManager.createCourier(courier.login(), courier.password(), courier.firstName());
@@ -28,6 +27,7 @@ public class CreateExistCourierTest {
 
     @Test
     @DisplayName("Создание существующего курьера")
+    @Step("Создание существующего курьера")
     public void createExistCourier() {
         courierManager
                 .createCourier(courier.login(), courier.password(), courier.firstName())
