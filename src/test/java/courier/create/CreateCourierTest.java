@@ -26,7 +26,6 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Создание курьера")
-    @Step("Создание курьера")
     public void createCourierWithAllParas() {
         courier = ObjectGenerator.generateCourier();
         sendRequest();
@@ -34,13 +33,13 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Создание курьера с обязательными параметрами")
-    @Step("Создание курьера с обязательными параметрами")
     public void createCourierWithRequiredParams() {
         courier = ObjectGenerator.generateCourierWithoutFirstName();
         sendRequest();
     }
 
     @After
+    @Step("Отправка запроса на удаление созданного курьера")
     public void delete() {
         Integer id = courierManager.login(courier.login(), courier.password()).extract().body().path("id");
         if (id != null) {
@@ -48,6 +47,7 @@ public class CreateCourierTest {
         }
     }
 
+    @Step("Отправка запроса на создание курьера")
     private void sendRequest() {
         courierManager
                 .createCourier(courier.login(), courier.password(), courier.firstName())

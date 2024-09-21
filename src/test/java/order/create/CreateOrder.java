@@ -61,13 +61,13 @@ public class CreateOrder {
 
     @Test
     @DisplayName("Создание заказа")
-    @Step("Создание заказа")
     public void createOrder() {
         track = orderManager.create(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color).extract().body().path("track");
         MatcherAssert.assertThat(track, notNullValue());
     }
 
     @After
+    @Step("Отмена созданного заказа")
     public void cancelOrder() {
         orderManager.cancel(track);
     }

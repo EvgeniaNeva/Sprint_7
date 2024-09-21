@@ -19,6 +19,7 @@ public class LoginCourierTestWithoutParams {
     private Courier courier;
 
     @Before
+    @Step("Создание курьера для теста")
     public void setUp() {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
@@ -27,19 +28,18 @@ public class LoginCourierTestWithoutParams {
 
     @Test
     @DisplayName("Авторизация курьера без логина")
-    @Step("Авторизация курьера без логина")
     public void loginCourierWithoutLogin() {
         sendLoginRequest("", courier.password());
     }
 
     @Test
     @DisplayName("Авторизация курьера без пароля")
-    @Step("Авторизация курьера без пароля")
     public void loginCourierWithoutPassword() {
         sendLoginRequest(courier.login(), "");
     }
 
     @After
+    @Step("Удаление созданного курьера")
     public void delete() {
         Integer id = courierManager.login(courier.login(), courier.password()).extract().body().path("id");
         if (id != null) {

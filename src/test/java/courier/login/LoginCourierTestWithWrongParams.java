@@ -19,6 +19,7 @@ public class LoginCourierTestWithWrongParams {
     private Courier courier;
 
     @Before
+    @Step("Генерирование курьера для теста")
     public void setUp() {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
@@ -26,14 +27,12 @@ public class LoginCourierTestWithWrongParams {
 
     @Test
     @DisplayName("Авторизация несуществующего курьера")
-    @Step("Авторизация несуществующего курьера")
     public void loginCourierWithNotExistParams() {
         sendLoginRequest(courier.login(), courier.password());
     }
 
     @Test
     @DisplayName("Авторизация курьера с неверным паролем")
-    @Step("Авторизация курьера с неверным паролем")
     public void loginCourierWithWrongPassword() {
         sendCreateRequest();
         sendLoginRequest(courier.login(), "password123456789");
@@ -41,13 +40,13 @@ public class LoginCourierTestWithWrongParams {
 
     @Test
     @DisplayName("Авторизация курьера с неверным логином")
-    @Step("Авторизация курьера с неверным логином")
     public void loginCourierWithWrongParams() {
         sendCreateRequest();
         sendLoginRequest("login123456789", "password123456789");
     }
 
     @After
+    @Step("Удаление курьера для теста")
     public void delete() {
         Integer id = courierManager.login(courier.login(), courier.password()).extract().body().path("id");
         if (id != null) {

@@ -21,6 +21,7 @@ public class LoginCourier {
     private Courier courier;
 
     @Before
+    @Step("Генерирование курьера для теста")
     public void setUp() {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
@@ -28,13 +29,13 @@ public class LoginCourier {
 
     @Test
     @DisplayName("Логин курьера")
-    @Step("Логин курьера")
     public void loginCourier() {
         courierManager.createCourier(courier.login(), courier.password(), courier.firstName());
         courierManager.login(courier.login(), courier.password()).body("id", notNullValue());
     }
 
     @After
+    @Step("Удаление созданного курьера")
     public void delete() {
         Integer id = courierManager.login(courier.login(), courier.password()).extract().body().path("id");
         if (id != null) {

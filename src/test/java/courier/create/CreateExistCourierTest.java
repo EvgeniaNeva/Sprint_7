@@ -19,6 +19,7 @@ public class CreateExistCourierTest {
     private Courier courier;
 
     @Before
+    @Step("Отправка запроса на создание курьера")
     public void setUp() {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         courier = ObjectGenerator.generateCourier();
@@ -27,7 +28,6 @@ public class CreateExistCourierTest {
 
     @Test
     @DisplayName("Создание существующего курьера")
-    @Step("Создание существующего курьера")
     public void createExistCourier() {
         courierManager
                 .createCourier(courier.login(), courier.password(), courier.firstName())
@@ -37,6 +37,7 @@ public class CreateExistCourierTest {
     }
 
     @After
+    @Step("Отправка запроса на удаление созданного курьера")
     public void delete() {
         Integer id = courierManager.login(courier.login(), courier.password()).extract().body().path("id");
         if (id != null) {

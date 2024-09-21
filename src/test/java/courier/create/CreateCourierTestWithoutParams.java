@@ -24,7 +24,6 @@ public class CreateCourierTestWithoutParams {
 
     @Test
     @DisplayName("Создание курьера без логина и пароля")
-    @Step("Создание курьера без логина и пароля")
     public void createCourierEmpty() {
         courier = ObjectGenerator.generateCourierWithoutAll();
         sendRequest();
@@ -32,7 +31,6 @@ public class CreateCourierTestWithoutParams {
 
     @Test
     @DisplayName("Создание курьера без логина")
-    @Step("Создание курьера без логина")
     public void createCourierWithoutLogin() {
         courier = ObjectGenerator.generateCourierWithoutLogin();
         sendRequest();
@@ -40,12 +38,12 @@ public class CreateCourierTestWithoutParams {
 
     @Test
     @DisplayName("Создание курьера без пароля")
-    @Step("Создание курьера без пароля")
     public void createCourierWithoutPassword() {
         courier = ObjectGenerator.generateCourierWithoutPassword();
         sendRequest();
     }
 
+    @Step("Отправка запроса на создание курьера")
     private void sendRequest() {
         String textError = "Недостаточно данных для создания учетной записи";
         courierManager

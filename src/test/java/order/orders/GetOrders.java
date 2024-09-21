@@ -24,7 +24,6 @@ public class GetOrders {
 
     @Test
     @DisplayName("Получение списка заказов")
-    @Step("Получение списка заказов")
     public void getOrders() {
         OrderResponse orderResponse = orderManager.getOrders().as(OrderResponse.class);
         MatcherAssert.assertThat(orderResponse.getArrayOrders(), not(emptyArray()));
