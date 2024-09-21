@@ -1,0 +1,8 @@
+order/orders/GetOrders.class
+courier/login/LoginCourierTestWithoutParams.class
+courier/login/LoginCourierTestWithWrongParams.class
+courier/create/CreateExistCourierTest.class
+courier/create/CreateCourierTestWithoutParams.class
+order/create/CreateOrder.class
+courier/create/CreateCourierTest.class
+courier/login/LoginCourier.class
